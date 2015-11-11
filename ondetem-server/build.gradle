@@ -16,13 +16,16 @@ jar {
     baseName = 'ondetem'
     version =  '0.1.0'
 }
+springBoot {
+    mainClass = "org.ondetem.Application"
+}
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
