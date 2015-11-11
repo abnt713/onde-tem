@@ -1,5 +1,7 @@
+/public/*
 /.settings/
 /.gradle/
+/build/
 .classpath
 .project
 ./public/**

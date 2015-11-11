@@ -12,6 +12,9 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
+apply plugin: 'application'
+mainClassName = "org.ondetem.Application"
+
 jar {
     baseName = 'ondetem'
     version =  '0.1.0'
