@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 			iconRetinaUrl: 'assets/images/marker-icon@2x.png',
 			shadowUrl: 'assets/images/marker-shadow.png'
 	}),
-	
+
 	didInsertElement : function(){
 			this.buildMap();
 	},
@@ -24,6 +24,10 @@ export default Ember.Component.extend({
 
 			var markers = this.get('markers');
 			this._addMarkers(map, markers);
+
+			map.on('contextmenu', function onMapClick(e) {
+					console.log("Context Menu at " + e.latlng);
+			});
 	},
 
 	_Map : function(){
