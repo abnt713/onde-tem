@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
 	markers : [],
 	mapHeight: '200px',
-	center : [51.5, -0.09],
+	center : [0.0, 0.0],
 	zoom : 13,
 	icon :  L.icon({
 			iconUrl: 'assets/images/marker-icon.png',
@@ -48,9 +48,9 @@ export default Ember.Component.extend({
 		if(markers){
 				for(var i=0; i < markers.length; ++i){
 						var marker = markers[i];
-						L.marker([marker.x, marker.y], {icon: this.getIcon()})
+						L.marker([marker.latitude, marker.longitude], {icon: this.getIcon()})
 							.addTo(map)
-							.bindPopup(String(marker.label) + "[" + marker.x + ", " + marker.y + "]").openPopup();
+							.bindPopup(String(marker.label) + "[" + marker.latitude + ", " + marker.longitude + "]").openPopup();
 				}
 		}
 	},
