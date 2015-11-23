@@ -2,7 +2,7 @@ package org.ondetem.services;
 
 import java.util.Collection;
 
-import org.ondetem.data.DataFactory;
+import org.ondetem.data.DataFacade;
 import org.ondetem.data.MarkersDAO;
 import org.ondetem.entities.Marker;
 import org.springframework.stereotype.Service;
@@ -13,14 +13,14 @@ public class MarkersService {
 	private MarkersDAO markersDAO;
 	
 	public MarkersService() {
-		markersDAO = DataFactory.instance().markersDAO();
+		markersDAO = DataFacade.dataLayer().getMarkersDAO();
 	}
 
 	public Collection<Marker> list(){
-		return markersDAO.list();
+		return (Collection<Marker>) markersDAO.findAll();
 	}
 	public Marker create(Marker marker){
 //		return marker;
-		return markersDAO.create(marker);
+		return markersDAO.save(marker);
 	}
 }

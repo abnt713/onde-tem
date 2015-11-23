@@ -23,12 +23,12 @@ public class MemoryMarkersDAO implements MarkersDAO {
 	}
 	
 	@Override
-	public Collection<Marker> list() {
+	public Collection<Marker> findAll() {
 		return markers;
 	}
 
 	@Override
-	public Marker create(Marker marker) {
+	public Marker save(Marker marker) {
 		Marker newMarker = new Marker(marker);
 		markers.add(newMarker);
 		return newMarker;
