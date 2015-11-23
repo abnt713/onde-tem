@@ -10,15 +10,19 @@ body {
   padding-top: 50px;
 }
 
-.marker-form{
-	display: none;
-	top: 0;
-	right: 0;
-	position: absolute;
-	height: 100vh;
-	width: 33%;
-	z-index: 1000;
-	background: #000;
+.marker-details{
+	padding-top: 5px;
+}
+
+.marker-details-header{
+	background: #cecece;
+	height: 75px;
+}
+
+.marker-details-title{
+	line-height: 75px;
+	font-size: 1.6em;
+	font-family: 'Roboto', sans-serif;
 }
 
 .content-wrapper{

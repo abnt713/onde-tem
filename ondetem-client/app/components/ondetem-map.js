@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	classNames: ['fullheight'],
+	classNames: ['fullheight', 'col-md-9'],
 
 	markers : [],
 	mapHeight: '200px',
