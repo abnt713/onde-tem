@@ -21,6 +21,9 @@ public class Marker implements Serializable{
 		this.label = label;
 	}
 	
+	public Marker(Marker marker) {
+		this(marker.getLatitude(), marker.getLongitude(), marker.getLabel());
+	}
 	public double getLatitude() {
 		return latitude;
 	}
