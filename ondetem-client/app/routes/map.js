@@ -48,9 +48,8 @@ export default Ember.Route.extend({
 				data: JSON.stringify(marker),
 				dataType: "json",
 				success: function(){
-					alert('Marcador inserido com sucesso');
-					location.reload();
-					// self.refresh();
+					//Refresh model;
+					self.refresh();
 				}
 			});
 		}

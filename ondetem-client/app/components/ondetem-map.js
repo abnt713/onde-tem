@@ -13,21 +13,31 @@ export default Ember.Component.extend({
 			shadowUrl: 'assets/images/marker-shadow.png'
 	}),
 
+	map : null,
+	markersLayer : null,
+
+	onChangeMarkers : Ember.observer('markers', function(){
+			this.clearMarkers();
+			this._addMarkers(this.map, this.get('markers'));
+	}),
+
 	didInsertElement : function(){
 			this.buildMap();
 	},
 
 	buildMap :function(){
-		var map = this._Map();
+		this.map = this._Map();
+		this.markersLayer = L.layerGroup();
+		this.markersLayer.addTo(this.map);
 
-		this._addMapLayer(map);
+		this._addMapLayer(this.map);
 
 		var markers = this.get('markers');
-		this._addMarkers(map, markers);
+		this._addMarkers(this.map, markers);
 
 		var self = this;
-		map.on('contextmenu', function onMapClick(e) {
-			map.panTo(e.latlng)
+		this.map.on('contextmenu', function onMapClick(e) {
+			self.map.panTo(e.latlng)
 			self.sendAction('contextmenu', e.latlng);
 			// var marker = {latitude:e.latlng[0], longitude:e.latlng[1], label: "novo"}
 			// self.addMarker(map, marker);
@@ -50,6 +60,7 @@ export default Ember.Component.extend({
 					attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			}).addTo(map);
 	},
+
 	_addMarkers : function(map, markers){
 		if(markers){
 				for(var i=0; i < markers.length; ++i){
@@ -62,15 +73,22 @@ export default Ember.Component.extend({
 		}
 	},
 
+	clearMarkers : function(){
+			var markers = this.get('markers');
+			for(var i=0; i < markers.length; ++i){
+					this.markersLayer.removeLayer(markers[i]);
+			}
+	},
+
 	getIcon : function(){
 			return this.get('icon');
 	},
 
 	addMarker: function(map, marker){
-
 		L.marker(L.latLng(marker.latitude, marker.longitude), {icon: this.getIcon()})
-			.addTo(map)
-			.bindPopup(String(marker.label) + "[" + marker.latitude + ", " + marker.longitude + "]").openPopup();
+			//.addTo(map)
+			.addTo(this.markersLayer)
+			.bindPopup(String(marker.label)).openPopup();
 	}
 
 });
