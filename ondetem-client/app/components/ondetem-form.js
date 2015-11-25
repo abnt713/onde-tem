@@ -14,6 +14,5 @@ export default Ember.Component.extend({
 
     didInsertElement: function(){
         this.set('marcador', {label: ''});
-        console.log(this.get('marcador'));
     }
 });
