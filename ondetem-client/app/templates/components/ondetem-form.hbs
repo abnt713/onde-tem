@@ -1,0 +1,26 @@
+{{yield}}
+
+<div class="marker-details">
+	<div class="content">
+		<header class="marker-details-header">
+			<div class="text-center marker-details-title">
+				Novo marcador
+				<a class="marker-details-close" href="#">X</a>
+			</div>
+		</header>
+		<form {{ action "novo_marcador" on="submit" }}>
+			<div class="form-group">
+				<label for="nome_marcador">Nome</label>
+				{{ input id="nome_marcador" name="marcador" placeholder="Nome" class="form-control" }}
+			</div>
+			<button type="submit" class="btn btn-default">Enviar</button>
+		</form>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$('.marker-details-close').on('click', function(){
+		$('.marker-details-wrapper').hide();
+	});
+</script>

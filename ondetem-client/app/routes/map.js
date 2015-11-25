@@ -8,5 +8,4 @@ export default Ember.Route.extend({
 			{latitude:-5.84132, longitude:-35.19833, label: "dimap"}
 		];
 	}
-
 });

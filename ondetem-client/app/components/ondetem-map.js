@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	classNames: ['fullheight'],
+	classNames: ['fullheight', 'map'],
 
 	markers : [],
 	mapHeight: '200px',
@@ -18,16 +18,21 @@ export default Ember.Component.extend({
 	},
 
 	buildMap :function(){
-			var map = this._Map();
+		var map = this._Map();
 
-			this._addMapLayer(map);
+		this._addMapLayer(map);
 
-			var markers = this.get('markers');
-			this._addMarkers(map, markers);
+		var markers = this.get('markers');
+		this._addMarkers(map, markers);
 
-			map.on('contextmenu', function onMapClick(e) {
-					console.log("Context Menu at " + e.latlng);
-			});
+		var self = this;
+		map.on('contextmenu', function onMapClick(e) {
+			map.panTo(e.latlng)
+			// var marker = {latitude:e.latlng[0], longitude:e.latlng[1], label: "novo"}
+			// self.addMarker(map, marker);
+			$('.marker-details-wrapper').show();
+				console.log("Context Menu at " + e.latlng);
+		});
 	},
 
 	_Map : function(){
@@ -48,15 +53,23 @@ export default Ember.Component.extend({
 		if(markers){
 				for(var i=0; i < markers.length; ++i){
 						var marker = markers[i];
-						L.marker([marker.latitude, marker.longitude], {icon: this.getIcon()})
-							.addTo(map)
-							.bindPopup(String(marker.label) + "[" + marker.latitude + ", " + marker.longitude + "]").openPopup();
+						// L.marker([marker.latitude, marker.longitude], {icon: this.getIcon()})
+						// 	.addTo(map)
+						// 	.bindPopup(String(marker.label) + "[" + marker.latitude + ", " + marker.longitude + "]").openPopup();
+						this.addMarker(map, marker);
 				}
 		}
 	},
 
 	getIcon : function(){
 			return this.get('icon');
+	},
+
+	addMarker: function(map, marker){
+
+		L.marker(L.latLng(marker.latitude, marker.longitude), {icon: this.getIcon()})
+			.addTo(map)
+			.bindPopup(String(marker.label) + "[" + marker.latitude + ", " + marker.longitude + "]").openPopup();
 	}
 
 });

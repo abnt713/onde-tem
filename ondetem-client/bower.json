@@ -13,6 +13,7 @@
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
     "leaflet": "~0.7.7",
-    "leaflet.markercluster": "~0.4.0"
+    "leaflet.markercluster": "~0.4.0",
+    "bootstrap": "~3.3.5"
   }
 }
