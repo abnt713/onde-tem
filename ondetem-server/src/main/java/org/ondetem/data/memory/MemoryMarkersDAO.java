@@ -21,17 +21,16 @@ public class MemoryMarkersDAO implements MarkersDAO {
 				, new Marker(-5.83239,-35.20469, "Residência Universitária")
 				));
 	}
-	
+
 	@Override
-	public Collection<Marker> findAll() {
+	public Iterable<Marker> findAll() {
 		return markers;
 	}
-
+	
 	@Override
 	public Marker save(Marker marker) {
 		Marker newMarker = new Marker(marker);
 		markers.add(newMarker);
 		return newMarker;
 	}
-
 }

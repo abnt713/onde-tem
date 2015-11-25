@@ -1,26 +1,30 @@
 package org.ondetem.services;
 
-import java.util.Collection;
-
-import org.ondetem.data.DataFacade;
-import org.ondetem.data.MarkersDAO;
+import org.ondetem.data.DataLayer;
 import org.ondetem.entities.Marker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MarkersService {
 
-	private MarkersDAO markersDAO;
+	@Autowired
+	private DataLayer dataLayer;
 	
-	public MarkersService() {
-		markersDAO = DataFacade.dataLayer().getMarkersDAO();
+	public DataLayer getDataLayer() {
+		return dataLayer;
+	}
+	public void setDataLayer(DataLayer dataLayer) {
+		this.dataLayer = dataLayer;
 	}
 
-	public Collection<Marker> list(){
-		return (Collection<Marker>) markersDAO.findAll();
+	public Iterable<Marker> list(){
+		System.out.println("MarkerDAO is: " + dataLayer.getMarkersDAO());
+		System.out.println("JPAMarkerDAO is: " + dataLayer.getJpaDAO());
+		return dataLayer.getMarkersDAO().findAll();
 	}
 	public Marker create(Marker marker){
 //		return marker;
-		return markersDAO.save(marker);
+		return dataLayer.getMarkersDAO().save(marker);
 	}
 }

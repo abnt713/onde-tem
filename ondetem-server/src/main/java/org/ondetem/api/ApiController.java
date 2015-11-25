@@ -12,7 +12,7 @@ public class ApiController {
 	static final ApiRoutes routes = new ApiRoutes();
 	
     @RequestMapping(method=RequestMethod.GET)
-    public ApiRoutes greeting() {
+    public ApiRoutes listRoutes() {
     	return routes;
     }
 }
