@@ -24,6 +24,17 @@ body {
 	padding: 1em;
 }
 
+.marker-desc-wrapper{
+	display: none;
+	flex-grow: 1;
+	padding: 1em;
+}
+
+.marker-desc-wrapper header{
+	background: #fff;
+	border: 1px solid #000;
+}
+
 .marker-details-close{
 	position: absolute;
 	display: block;
