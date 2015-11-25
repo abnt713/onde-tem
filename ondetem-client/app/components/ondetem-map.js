@@ -28,6 +28,7 @@ export default Ember.Component.extend({
 		var self = this;
 		map.on('contextmenu', function onMapClick(e) {
 			map.panTo(e.latlng)
+			self.sendAction('contextmenu', e.latlng);
 			// var marker = {latitude:e.latlng[0], longitude:e.latlng[1], label: "novo"}
 			// self.addMarker(map, marker);
 			$('.marker-details-wrapper').show();
