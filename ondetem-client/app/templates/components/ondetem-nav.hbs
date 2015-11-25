@@ -5,10 +5,16 @@
 			<a class="navbar-brand" href="#">ONDE TEM</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<form class="navbar-form">
+			<div class="navbar-form">
 				<input type="text" placeholder="Onde tem?" class="form-control text-center">
-				<button type="submit" class="btn btn-success">Buscar</button>
-			</form>
+				<button type="submit" class="header-find btn btn-success">Buscar</button>
+			</div>
 		</div><!--/.navbar-collapse -->
 	</div>
 </nav>
+
+<script type="text/javascript">
+	$('.header-find').on('click', function(){
+		$('.marker-details-wrapper').toggle();
+	});
+</script>

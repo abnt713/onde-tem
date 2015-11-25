@@ -1,5 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    classNames: ['col-md-3']
+    classNames: ['marker-details-wrapper'],
+
+    actions: {
+        novo_marcador: function(){
+            console.log("Consegui! " + nome);
+        }
+    }
 });
