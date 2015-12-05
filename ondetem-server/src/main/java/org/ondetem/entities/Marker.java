@@ -7,7 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Marker implements Serializable{
 	/**
 	 * 
@@ -19,6 +23,8 @@ public class Marker implements Serializable{
 	private Long id;
 	
 	private double latitude, longitude;
+	
+	@Field
 	private String label;
 	
 	public Marker() {

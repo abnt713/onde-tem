@@ -22,6 +22,9 @@ public class Application {
 			@Override
 			public void run(String... args) throws Exception {
 				System.out.println(layer);
+				if(layer != null){
+					System.out.println(layer.getMarkersDAO());
+				}
 			}
 		};
     	
