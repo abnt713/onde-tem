@@ -1,9 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+	currentQuery: "",
+
 	model(){
+		var self = this;
 		return new Ember.RSVP.Promise(function(resolve){
-			$.get('/api/v1/markers', '', function(data){
+			var query = self.get("currentQuery");
+			if(query !== ""){
+				query = 'q=' + query;
+			}
+
+			$.get('/api/v1/markers', query, function(data){
 				resolve(data);
 			}, 'json');
 		});
@@ -36,10 +44,6 @@ export default Ember.Route.extend({
 			var marker = this.get('novo_marcador');
 			marker.label = label;
 			this.set('novo_marcador', marker);
-
-			// $.post('/api/v1/markers/', marker, function(data){
-			// 	alert("Sucesso!");
-			// }, "json");
 			var self = this;
 			$.ajax({
 				type: "POST",
@@ -49,9 +53,19 @@ export default Ember.Route.extend({
 				dataType: "json",
 				success: function(){
 					//Refresh model;
+					this.set('currentQuery', '');
 					self.refresh();
 				}
 			});
+		},
+
+		apisearchquery: function(query){
+			this.set('currentQuery', query);
+			this.refresh();
+			// var self = this;
+			// $.get('/api/v1/markers', '', function(data){
+			// 	self.refresh();
+			// }, 'json');
 		}
 	}
 });

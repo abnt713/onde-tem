@@ -1,0 +1,9 @@
+{{yield}}
+
+<div id="navbar" class="navbar-collapse collapse">
+    <div class="navbar-form">
+        {{ input class="form-control text-center" value=currentQuery}}
+        <!-- <input type="text" placeholder="Onde tem?" class="form-control text-center"> -->
+        <button {{action 'search'}} class="header-find btn btn-success">Buscar</button>
+    </div>
+</div>

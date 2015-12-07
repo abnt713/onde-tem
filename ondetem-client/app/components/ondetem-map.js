@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 	markers : [],
 	mapHeight: '200px',
 	center : [0.0, 0.0],
-	zoom : 13,
+	zoom : 3,
 	icon :  L.icon({
 			iconUrl: 'assets/images/marker-icon.png',
 			iconRetinaUrl: 'assets/images/marker-icon@2x.png',
@@ -17,6 +17,8 @@ export default Ember.Component.extend({
 	markersLayer : null,
 
 	onChangeMarkers : Ember.observer('markers', function(){
+		console.log("Chamando doutor hans chucrute");
+		console.log(this.get('markers'));
 			this.clearMarkers();
 			this._addMarkers(this.map, this.get('markers'));
 	}),
@@ -76,7 +78,8 @@ export default Ember.Component.extend({
 	clearMarkers : function(){
 			var markers = this.get('markers');
 			for(var i=0; i < markers.length; ++i){
-					this.markersLayer.removeLayer(markers[i]);
+				this.markersLayer.clearLayers();
+					// this.markersLayer.removeLayer(markers[i]);
 			}
 	},
 

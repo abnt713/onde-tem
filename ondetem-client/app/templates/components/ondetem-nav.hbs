@@ -4,17 +4,6 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">ONDE TEM</a>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<div class="navbar-form">
-				<input type="text" placeholder="Onde tem?" class="form-control text-center">
-				<button type="submit" class="header-find btn btn-success">Buscar</button>
-			</div>
-		</div><!--/.navbar-collapse -->
+		{{ondetem-search search="searchquery"}}
 	</div>
 </nav>
-
-<script type="text/javascript">
-	$('.header-find').on('click', function(){
-		$('.marker-desc-wrapper').toggle();
-	});
-</script>
