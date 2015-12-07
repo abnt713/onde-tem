@@ -16,14 +16,6 @@ public class JPAMarkersFinder extends BaseEntityFinder implements MarkersFinder{
 	@Override
     @Transactional(readOnly=true)
 	public List<Marker> search(String query) {
-//    	try {
-//    		//FIXME: remover isto (apenas para testes
-//			forceUpdateSearchIndexes();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
     	FullTextEntityManager fullTextEntityManager = getFullTextEntityManager();
     	
 		// create native Lucene query unsing the query DSL
@@ -33,6 +25,7 @@ public class JPAMarkersFinder extends BaseEntityFinder implements MarkersFinder{
 		    .buildQueryBuilder().forEntity(Marker.class).get();
 		org.apache.lucene.search.Query luceneQuery = qb
 		  .keyword()
+		  .fuzzy()
 		  .onFields("label")
 		  .matching(query)
 		  .createQuery();

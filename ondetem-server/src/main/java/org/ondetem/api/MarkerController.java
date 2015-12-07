@@ -4,7 +4,6 @@ import org.ondetem.config.ApiRequestMapping;
 import org.ondetem.entities.Marker;
 import org.ondetem.services.MarkersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -50,6 +50,9 @@ public class BaseEntityFinder {
 	    if (ftem == null) {
 	        ftem = Search.getFullTextEntityManager(getEntityManager());
 	        try {
+				/* Como o banco de dados é resetado a cada vez que
+				 * a aplicação inicializa (banco em memória), é preciso reconstruir
+				 * os índices de busca utilizados pelo hibernate-search.*/
 				ftem.createIndexer().startAndWait();
 			} catch (InterruptedException e) {//TODO: tratar exceção
 				e.printStackTrace();
