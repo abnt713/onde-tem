@@ -2,8 +2,10 @@ package org.ondetem.api;
 
 import org.ondetem.config.ApiRequestMapping;
 import org.ondetem.entities.Marker;
+import org.ondetem.entities.RateValue;
 import org.ondetem.services.MarkersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,5 +40,9 @@ public class MarkerController {
 	public Marker createMarker(@RequestBody Marker marker){
 		return markersService.create(marker);
 	}
-	
+
+	@RequestMapping(value=ApiRequestMapping.MARKERS_RATE_ROUTE, method=RequestMethod.POST)
+	public Marker rateMarker(@PathVariable("id") Long markerId, @RequestBody RateValue rateValue){
+		return markersService.rate(markerId, rateValue);
+	}
 }
