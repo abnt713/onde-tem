@@ -44,6 +44,8 @@ public class Marker implements Serializable{
 	@Analyzer(definition="customanalyzer")
 	private String label;
 	
+	private int rating;
+	
 	public Marker() {
 		this(0,0, "");
 	}
@@ -81,6 +83,10 @@ public class Marker implements Serializable{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
-	
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 }
