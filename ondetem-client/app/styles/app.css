@@ -16,17 +16,27 @@ body {
 
 .map{
 	flex-grow: 4;
+	flex-shrink: 4;
 }
 
 .marker-details-wrapper{
+	flex:none;
 	display: none;
 	flex-grow: 1;
+	flex-basis: auto;
 	padding: 1em;
+}
+
+.flexwrap{
+	flex-wrap: wrap;
+	word-wrap: normal;
+	flex-shrink: 1;
+	max-width: 100px;
 }
 
 .marker-desc-wrapper{
 	display: none;
-	flex-grow: 1;
+	flex: 0 0 30em;
 	padding: 1em;
 }
 
@@ -45,12 +55,19 @@ body {
 
 .marker-details{
 	padding-top: 5px;
+	position: relative;
 }
 
 .marker-details-header{
 	background: #cecece;
 	height: 75px;
 	margin-bottom: 1em;
+}
+
+.marker-details-content{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
 }
 
 .marker-details-title{
