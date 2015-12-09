@@ -5,7 +5,8 @@ export default Ember.Route.extend({
 
 	model(){
 		var self = this;
-		return new Ember.RSVP.Promise(function(resolve){
+		console.log('Chamando model');
+		var model = new Ember.RSVP.Promise(function(resolve){
 			var query = self.get("currentQuery");
 			if(query !== ""){
 				query = 'q=' + query;
@@ -15,6 +16,10 @@ export default Ember.Route.extend({
 				resolve(data);
 			}, 'json');
 		});
+
+		console.log(model);
+
+		return model;
 		// return [
 		// 	{latitude:0.0, longitude:0.0, label:"center of the world"},
 		// 	{latitude:0.1, longitude:-0.10, label:"other marker"},
@@ -53,7 +58,7 @@ export default Ember.Route.extend({
 				dataType: "json",
 				success: function(){
 					//Refresh model;
-					this.set('currentQuery', '');
+					self.set('currentQuery', '');
 					self.refresh();
 				}
 			});
