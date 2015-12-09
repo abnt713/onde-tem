@@ -4,15 +4,19 @@
 	<div class="content">
 		<header class="marker-details-header">
 			<div class="text-center marker-details-title">
-				Nome do marcador
+				{{displayMarker.label}}
 				<a class="marker-desc-close" href="#">X</a>
 			</div>
 		</header>
-				<p><strong>Nome:</strong> Nome do marcador</p>
-                <p><strong>Latitude:</strong> 0.0</p>
-                <p><strong>Longitude:</strong> 0.0</p>
+		<div class="marker-details-content">
+			<p>
+				<strong>Endereço:</strong> {{displayMarker.address}}
+			</p>
+		</div>
 
-
+		<div class="marker-rating">
+			
+		</div>
 	</div>
 </div>
 

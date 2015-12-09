@@ -35,14 +35,10 @@ export default Ember.Route.extend({
 
 	actions: {
 		new_marker: function(latlng){
-			console.log(latlng);
 			var marker = this.get('novo_marcador');
-			console.log(marker);
 			marker.latitude = latlng.lat;
 			marker.longitude = latlng.lng;
-
 			this.set('novo_marcador', marker);
-			console.log(this.get('novo_marcador'));
 		},
 
 		save_marker: function(label){
