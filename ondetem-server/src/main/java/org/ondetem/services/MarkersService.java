@@ -50,7 +50,7 @@ public class MarkersService {
 		}
 		
 		Marker marker = getMarker(markerId);
-		marker.setRating(marker.getRating() + rateValue.getScore());
+		marker.rate(rateValue.getScore());
 
 		getDAO().update(marker);
 		

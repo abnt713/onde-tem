@@ -44,7 +44,7 @@ public class Marker implements Serializable{
 	@Analyzer(definition="customanalyzer")
 	private String label;
 	
-	private int rating;
+	private int positiveCount, negativeCount;
 	
 	public Marker() {
 		this(0,0, "");
@@ -83,10 +83,25 @@ public class Marker implements Serializable{
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	public int getRating() {
-		return rating;
+	public int getPositiveCount() {
+		return positiveCount;
 	}
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setPositiveCount(int positiveCount) {
+		this.positiveCount = positiveCount;
+	}
+	public int getNegativeCount() {
+		return negativeCount;
+	}
+	public void setNegativeCount(int negativeCount) {
+		this.negativeCount = negativeCount;
+	}
+	
+	public void rate(int score){
+		if(score < 0){
+			negativeCount += -score;
+		}
+		else{
+			positiveCount += score;
+		}
 	}
 }
