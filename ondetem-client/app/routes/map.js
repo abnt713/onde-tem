@@ -67,6 +67,10 @@ export default Ember.Route.extend({
 			// $.get('/api/v1/markers', '', function(data){
 			// 	self.refresh();
 			// }, 'json');
+		},
+
+		reload: function(){
+			this.refresh();
 		}
 	}
 });

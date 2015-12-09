@@ -49,6 +49,8 @@ export default Ember.Component.extend({
 			$('.marker-details-wrapper').show();
 			console.log("Context Menu at " + e.latlng);
 		});
+
+		this.map.locate({setView: true, maxZoom: 16});
 	},
 
 	_Map : function(){
