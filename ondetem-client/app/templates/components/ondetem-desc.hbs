@@ -17,16 +17,28 @@
 		<div class="marker-rating">
 			<p class="text-center">
 				<strong>Pontuação</strong><br>
-				{{displayMarker.rating}}
+				Votos: {{total}}
 			</p>
+			<div class="progress">
+			 <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{positiveProgress}}%">
+			   {{positive}}
+			 </div>
+			 <div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{negativeProgress}}%">
+			   {{negative}}
+			 </div>
+			</div>
 			<div class="rating-wrapper">
-				<div class="rating text-success text-center">
-					<i class="fa fa-thumbs-o-up rating-icon"></i><br>
-					Aprovado
+				<div class="rating text-center">
+					<a href="#" {{action 'rating_up'}} class="text-success">
+						<i class="fa fa-thumbs-o-up rating-icon"></i><br>
+						Aprovado
+					</a>
 				</div>
-				<div class="rating text-danger text-center">
-					<i class="fa fa-thumbs-o-down rating-icon"></i><br>
-					Reprovado
+				<div class="rating text-center">
+					<a href="#" {{action 'rating_down'}} class="text-danger">
+						<i class="fa fa-thumbs-o-down rating-icon"></i><br>
+						Reprovado
+					</a>
 				</div>
 			</div>
 		</div>

@@ -33,5 +33,29 @@ export default Ember.Component.extend({
         save_marker: function(label){
 			this.sendAction('save_marker', label);
 		},
+
+        change_rating: function(value){
+            var markerId = this.get('displayMarker').id;
+            var data = new Ember.RSVP.Promise(function(resolve){
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: '/api/v1/markers/' + markerId + '/rate',
+                    data: {
+                        'score': value
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        resolve(data);
+                    }
+                });
+    		});
+
+            data.then(function(data){
+                var marker = this.get('displayMarker');
+                marker.positiveCount = data.positiveCount;
+                marker.negativeCount = data.negativeCount;
+            });
+        }
     }
 });
