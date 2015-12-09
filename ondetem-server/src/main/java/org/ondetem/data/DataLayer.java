@@ -15,5 +15,4 @@ public class DataLayer {
 	public void setMarkersDAO(MarkersDAO markersDAO) {
 		this.markersDAO = markersDAO;
 	}
-	
 }

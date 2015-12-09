@@ -1,10 +1,8 @@
-package org.ondetem.services.exceptions;
+package org.ondetem.services;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.ondetem.exceptions.ClientError;
 
-@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Invalid rate score")
-public class InvalidRateScore extends RuntimeException{
+public class InvalidRateScore extends ClientError{
 
 	/**
 	 * 

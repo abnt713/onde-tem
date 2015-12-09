@@ -3,13 +3,18 @@ package org.ondetem.api;
 import org.ondetem.config.ApiRequestMapping;
 import org.ondetem.entities.Marker;
 import org.ondetem.entities.RateValue;
+import org.ondetem.exceptions.ClientError;
+import org.ondetem.exceptions.ErrorMessage;
 import org.ondetem.services.MarkersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -44,5 +49,17 @@ public class MarkerController {
 	@RequestMapping(value=ApiRequestMapping.MARKERS_RATE_ROUTE, method=RequestMethod.POST)
 	public Marker rateMarker(@PathVariable("id") Long markerId, @RequestBody RateValue rateValue){
 		return markersService.rate(markerId, rateValue);
+	}
+	
+	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(ClientError.class)
+	public ErrorMessage onBadRequestError(ClientError err){
+		return new ErrorMessage(err);
+	}
+
+	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(Throwable.class)
+	public ErrorMessage onServerError(Throwable err){
+		return new ErrorMessage(err);
 	}
 }
