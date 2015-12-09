@@ -7,4 +7,5 @@ public interface MarkersDAO {
 	public Iterable<Marker> findAll();
 	public Marker create(Marker marker);
 	public void update(Marker marker);
+	public boolean exists(Long markerId);
 }

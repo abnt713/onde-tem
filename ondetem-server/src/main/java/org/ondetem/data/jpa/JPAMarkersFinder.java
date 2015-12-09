@@ -12,12 +12,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class JPAMarkersFinder extends BaseEntityFinder implements MarkersFinder{
 
-    @SuppressWarnings("unchecked")
 	@Override
     @Transactional(readOnly=true)
 	public List<Marker> search(String query) {
     	FullTextEntityManager fullTextEntityManager = getFullTextEntityManager();
     	
+		org.apache.lucene.search.Query luceneQuery = makeQueryBuilder(query, fullTextEntityManager);
+
+		return executeQueryForMarker(fullTextEntityManager, luceneQuery);
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<Marker> executeQueryForMarker(FullTextEntityManager fullTextEntityManager,
+			org.apache.lucene.search.Query luceneQuery) {
+		// wrap Lucene query in a javax.persistence.Query
+		javax.persistence.Query jpaQuery =
+		    fullTextEntityManager.createFullTextQuery(luceneQuery, Marker.class);
+		
+		// execute search
+		return (List<Marker>)jpaQuery.getResultList();
+	}
+
+	private org.apache.lucene.search.Query makeQueryBuilder(String query, FullTextEntityManager fullTextEntityManager) {
 		// create native Lucene query unsing the query DSL
 		// alternatively you can write the Lucene query using the Lucene query parser
 		// or the Lucene programmatic API. The Hibernate Search DSL is recommended though
@@ -29,13 +45,7 @@ public class JPAMarkersFinder extends BaseEntityFinder implements MarkersFinder{
 		  .onFields("label")
 		  .matching(query)
 		  .createQuery();
-
-		// wrap Lucene query in a javax.persistence.Query
-		javax.persistence.Query jpaQuery =
-		    fullTextEntityManager.createFullTextQuery(luceneQuery, Marker.class);
-		
-		// execute search
-		return (List<Marker>)jpaQuery.getResultList();
+		return luceneQuery;
 	}
 
 }

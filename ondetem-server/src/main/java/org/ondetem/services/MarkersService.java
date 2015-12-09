@@ -5,7 +5,8 @@ import org.ondetem.data.MarkersDAO;
 import org.ondetem.data.MarkersFinder;
 import org.ondetem.entities.Marker;
 import org.ondetem.entities.RateValue;
-import org.ondetem.services.exceptions.InvalidRateScore;
+import org.ondetem.exceptions.DatabaseError;
+import org.ondetem.exceptions.MemberNotExistError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,10 +35,17 @@ public class MarkersService {
 	}
 	
 	public Iterable<Marker> list(){
-		return getDAO().findAll();
+		try{
+			return getDAO().findAll();
+		}
+		catch(Throwable ex){ throw new DatabaseError(ex);}
+			
 	}
 	public Marker create(Marker marker){
-		return getDAO().create(marker);
+		try{
+			return getDAO().create(marker);
+		}
+		catch(Throwable ex){ throw new DatabaseError(ex);}
 	}
 	public Iterable<Marker> search(String query) {
 		return markersFinder.search(query);
@@ -45,22 +53,36 @@ public class MarkersService {
 	
 	@Transactional
 	public Marker rate(Long markerId, RateValue rateValue) {
-		if(rateValue.getScore() != 1 && rateValue.getScore() != -1 ){
-			throw new InvalidRateScore("Rate score " + rateValue.getScore() + " is invalid");
+		verifyRateScore(rateValue);
+		verifyMarkerExistence(markerId);
+		
+		try{
+			Marker marker = getMarker(markerId);
+			marker.rate(rateValue.getScore());
+	
+			getDAO().update(marker);
+			
+			return getMarker(markerId);
 		}
-		
-		Marker marker = getMarker(markerId);
-		marker.rate(rateValue.getScore());
-
-		getDAO().update(marker);
-		
-		return getMarker(markerId);
+		catch(Throwable ex){ throw new DatabaseError(ex);}
 	}
+	
 	private Marker getMarker(Long markerId) {
 		return getDAO().get(markerId);
 	}
 
 	private MarkersDAO getDAO() {
 		return dataLayer.getMarkersDAO();
+	}
+
+	private void verifyRateScore(RateValue rateValue) {
+		if(rateValue.getScore() != 1 && rateValue.getScore() != -1 ){
+			throw new InvalidRateScore("Rate score " + rateValue.getScore() + " is invalid");
+		}
+	}
+	private void verifyMarkerExistence(Long markerId) {
+		if(!getDAO().exists(markerId)){
+			throw new MemberNotExistError("Marker with id " + markerId + " does not exist");
+		}
 	}
 }
